@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+*{
+	margin: 0;
+}
+
+div#main_box{
+	width: 500px;
+	/* background-color: #cccccc; */
+	margin: auto;/* 중앙배치 */	
+}
+
+h1{ 
+	text-align: center;
+    font-size: 25pt;
+    font-family: 굴림체; 
+    color: #004080;	
+    margin-top: 20px;
+    margin-bottom: 20px; 
+}
+
+hr{
+	border: none;
+	height: 30px;
+}
+
+.content_box{
+	width: 500px;
+	/* background-color: green; */
+	border: 3px solid red;	
+}
+
+.content{
+	width: 500px;
+	min-height:100px;
+	height: auto;/* 내용에 따라 늘어난다 */
+	background-color: aqua; 
+	color: maroon;
+}
+
+.name , .date{
+	background-color: #d1d3fc;
+	color: #0000a0;
+}

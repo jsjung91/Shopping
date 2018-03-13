@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "mapper.ShopMapper">
+
+<!-- 조회 -->
+ <select id="shopList"  resultType="vo.ShopVo" parameterType="String">
+ 	select * from shop where category = #{category}
+ </select>
+ 
+<!-- 조건 별 검색  -->
+ <select id="shopOne"  parameterType="int"  resultType="vo.ShopVo">
+ 	select * from shop where idx=#{ idx }
+ </select>
+ 
+<!-- 추가  -->
+ <insert id="shopInsert"  parameterType="vo.ShopVo">
+   insert into shop values(
+          #{idx},
+          #{ category },
+          #{ p_name},
+          #{ p_company },
+          #{ p_price },
+          #{ p_saleprice },
+          #{ p_image_s },
+          #{ p_image_l },
+          #{ p_content },
+          now())
+ </insert>
+ 
+<!-- 수정 -->
+ <update id="shopUpdate" parameterType="vo.ShopVo">
+    update shop 
+        set category=#{category}, p_name=#{ p_name }, p_company=#{ p_company}, p_content=#{ p_content } 
+    where idx=#{ idx }
+ </update>
+ 
+<select id="shopView" resultType="vo.ShopVo" parameterType="int">
+		select * from shop where idx = #{ idx }
+</select>
+	
+<!-- 장바구니 조회 -->
+ <select id="cartList" resultType="vo.CartVo">
+	select * from cart_view
+ </select>
+
+<!-- 1개 정보 가져오기 -->
+ <select id="cartOne" parameterType="int" resultType="vo.CartVo">
+	select * from cart_view where idx = #{idx}
+ </select>
+
+<!-- 장바구니 삭제 -->
+ <delete id="cartDelete" parameterType="int">
+ 	delete from cart_view where idx=#{idx}
+ </delete>
+
+<!-- 장바구니 수량 수정 -->
+ <update id="cartUpdate" parameterType="vo.CartVo">
+ 	update cart set cnt=#{cnt} where idx = #{idx}
+ </update>
+ 
+<!-- 장바구니 추가 -->
+ <insert id="cartInsert" parameterType="vo.CartVo">
+ 	insert into cart values(
+ 			#{idx},
+ 			#{cnt})
+ </insert>
+
+ <!-- 장바구니 총계 구하기 -->
+ <select id="totalAmount">
+ 	select sum(amount) total from cart_view
+ </select> 
+ 
+ 
+ 
+ 
+ <!-- 로그인 정보  -->
+ <select id="memberOne">
+ 	select * from member where id = #{id} and pwd = #{pwd}
+ </select>
+ 
+ <!-- 사용자 등록 -->
+ <insert id="memberInsert" parameterType="vo.MemberVo">
+ 	insert into member values(
+ 			#{idx},
+ 			#{name},
+ 			#{id},
+ 			#{pwd}
+ 	)
+ </insert>
+ 
+</mapper>
